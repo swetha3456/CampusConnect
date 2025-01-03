@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lost & Found Items</title>
+    <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap"
+    rel="stylesheet"
+  />
+    <!-- Stylesheet -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'wordleapp/lostandfound.css' %}" />
+</head>
+<body>
+    <nav>
+        <div class="navbar">
+          <div class="container1 nav-container">
+              <input class="checkbox" type="checkbox" name="" id="" />
+              <div class="hamburger-lines">
+                <span class="line line1"></span>
+                <span class="line line2"></span>
+                <span class="line line3"></span>
+              </div>  
+            <div class="logo">
+              <h1></h1>
+            </div>
+            <div class="menu-items">
+              <li><a href="http://127.0.0.1:8000/">Campus Central</a></li>
+              <li><a href="http://127.0.0.1:8000/issuecentral/">Issue Center</a></li>
+              <li><a href="http://127.0.0.1:8000/lostandfound/">Lost & Found</a></li>
+              <li><a href="http://127.0.0.1:8000/collaboration/">Collaboration</a></li>
+            </div>
+          </div>
+        </div>
+      </nav>
+    <div class="container">
+        <h2>Lost Items</h2>
+        <ul class="responsive-table">
+          <li class="table-header">
+            <div class="col col-1">Item Id</div>
+            <div class="col col-2">Item Name</div>
+            <div class="col col-3">Item Description</div>
+            <!-- <div class="col col-4">Payment Status</div> -->
+          </li>
+          
+          {% for item_lost in items_lost %}
+          <li class="table-row">
+            <div class="col col-1" data-label="Item Id">{{ item_lost.id }}</div>
+            <div class="col col-2" data-label="Item Name">{{ item_lost.item_name }}</div>
+            <div class="col col-3" data-label="Item Description">{{ item_lost.item_descr }}</div>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="container">
+        <h2>Found Items</h2>
+        <ul class="responsive-table">
+          <li class="table-header">
+            <div class="col col-1">Item Id</div>
+            <div class="col col-2">Item Name</div>
+            <div class="col col-3">Item Description</div>
+            <!-- <div class="col col-4">Payment Status</div> -->
+          </li>
+          
+          {% for item_found in items_found %}
+          <li class="table-row">
+            <div class="col col-1" data-label="Item Id">{{ item_found.id }}</div>
+            <div class="col col-2" data-label="Item Name">{{ item_found.item_name }}</div>
+            <div class="col col-3" data-label="Item Description">{{ item_found.item_descr }}</div>
+          </li>
+          {% endfor %}
+
+         
+        </ul>
+      </div>
+      <div style="display:flex; flex-direction: row; justify-content: space-between; align-items: center; margin:3%">
+      <div class="sup" role="img" aria-label="cartoon of a lost-and-found wooden box with baseballs, a football, a racquet... (it's a reference to Pixar's Lou shortfilm)"></div>
+        <a href="http://127.0.0.1:8000/lostform/">
+      <button>
+        <span aria-hidden="true">Post Lost Item</span>
+        <span></span>
+        <span>Post Lost Item</span>
+      </button> 
+      </a>  
+      <a href="http://127.0.0.1:8000/foundform/">
+      <button>
+        <span aria-hidden="true">Post Lost Item</span>
+        <span></span>
+        <span>Post Found Item</span>
+      </button>  
+      </a> 
+    </div>
+    </body>
+</html>
