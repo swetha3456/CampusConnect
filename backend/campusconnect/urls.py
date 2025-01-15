@@ -29,4 +29,5 @@ urlpatterns = [
     path('api/', include('apps.lost_and_found.urls')),
     path('api/', include('apps.collaboration.urls')),
     path('', include('apps.home.urls')),
+    path('api/users/', include('users.urls')),
 ]
