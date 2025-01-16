@@ -25,9 +25,11 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('apps.issues.urls')),  # Ensure this is correct
-    path('api/', include('apps.lost_and_found.urls')),
-    path('api/', include('apps.collaboration.urls')),
+    path('api/issues/', include('apps.issues.urls')),  # Use distinct base paths
+    path('api/lost_and_found/', include('apps.lost_and_found.urls')),
+    path('api/collaboration/', include('apps.collaboration.urls')),
+    path('api/peer_tutor/', include('apps.peer_tutor.urls')),  # Correct base path
     path('', include('apps.home.urls')),
     path('api/users/', include('users.urls')),
 ]
+

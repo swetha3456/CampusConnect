@@ -15,6 +15,7 @@ const HomePage = () => {
         <Link to="/lost-and-found">
           <button>Lost and Found Hub</button>
         </Link>
+        <Link to="/peer-tutor"><button>PeerTutor</button></Link>
       </div>
     </div>
   );

@@ -45,7 +45,9 @@ INSTALLED_APPS = [
     'apps.collaboration',
     'apps.home',
     'users',
+    'apps.peer_tutor',
     'corsheaders',
+
 ]
 
 MIDDLEWARE = [
@@ -113,6 +115,11 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+}
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+    ]
 }
 
 
