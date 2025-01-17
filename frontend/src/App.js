@@ -4,7 +4,7 @@ import LandingPage from './components/LandingPage';
 import Login from './components/Login';
 import Register from './components/Register';
 import HomePage from './components/HomePage';
-
+import PeerTutor from './pages/PeerTutor';
 const App = () => {
   return (
     <div>
