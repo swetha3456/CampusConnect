@@ -30,17 +30,10 @@ const LandingPage = () => {
       <div className="welcome-section">
         <div className="container2">
           <h2>Welcome To</h2>
-          <h1 contentEditable>Campus &emsp; Central</h1>
+          <h1>CampusConnect</h1>
+          <p>Your one-stop platform for all campus activities and connections.</p>
+          <button onClick={handleGetStarted}>GET STARTED</button>
         </div>
-        <div id="building"></div>
-      </div>
-
-      <div className="cta-section">
-        <div id="computer"></div>
-        <p>College can be difficult. Let us help.</p>
-        <button className="get-started-btn" onClick={handleGetStarted}>
-          Get Started
-        </button>
       </div>
     </div>
   );

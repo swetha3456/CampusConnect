@@ -1,4 +1,4 @@
-/* Landing Page Styles */
+/* Landing Page Styles
 .landing-container {
     display: flex;
     flex-direction: column;
@@ -95,4 +95,41 @@
   .get-started-btn:hover {
     background: var(--light-blue);
   }
+   */
+   .landing-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #0C3B2E;
+  }
   
+  .welcome-section {
+    text-align: center;
+    color: #E8A832;
+  }
+  
+  .container2 h1 {
+    font-size: 3rem;
+    color: #EB587C;
+  }
+  
+  .container2 p {
+    font-size: 1.2rem;
+    color: #CA7213;
+    margin: 20px 0;
+  }
+  
+  button {
+    background-color: #E8A832;
+    color: #0C3B2E;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #CA7213;
+  }
