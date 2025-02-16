@@ -1,6 +1,6 @@
 body {
     font-family: 'lato', sans-serif;
-    background-color: #f4d8c5;
+    background-color: #EFE9D5;
 width: 100%;
 max-width: 100%
   }
@@ -186,7 +186,7 @@ max-width: 100%
         margin-bottom: 10px;
     }
     .table-header {
-        background-color: #f0b877;
+        background-color: #497D74;
         font-size: 14px;
         text-transform: uppercase;
         letter-spacing: 0.03em;
@@ -220,7 +220,7 @@ max-width: 100%
             padding: 10px 0;
         }
         .col::before {
-            color: #f0b877;
+            color: #497D74;
             padding-right: 10px;
             content: attr(data-label);
             flex-basis: 50%;
@@ -452,8 +452,8 @@ max-width: 100%
   
   :root{
     --bg-color-1: #ffffff;
-    --bg-color-2: #d36608;
-    --bg-color-3: #f6c8a8;
+    --bg-color-2: #497D74;
+    --bg-color-3: #71BBB2;
     --padding: 1rem 4rem;
     --font-family: monospace;
     --step: 0.5rem;
