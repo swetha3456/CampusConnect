@@ -1,6 +1,6 @@
 body {
   font-family: 'lato', sans-serif;
-  background-color: #ae4e0f;
+  background-color: #EFE9D5;
 width: 100%;
 max-width: 100%
 }
@@ -198,18 +198,18 @@ max-width: 100%
       conic-gradient(from 135deg at 50% 50%, #423b4d 0 90deg, transparent 0 100%)
         64px 306px / 18px 18px,
       linear-gradient(#423b4d, #423b4d) 64px bottom / 18px 26px,
-      linear-gradient(#a74c46, #a74c46) 40px 138px / 120px 8px,
+      linear-gradient(#27445D, #27445D) 40px 138px / 120px 8px,
       radial-gradient(#423b4d 9px, transparent 10px) 90px 233px / 20px 20px,
       linear-gradient(#423b4d, #423b4d) 163px bottom / 20px 40px,
       linear-gradient(#423b4d, #423b4d) 17px bottom / 20px 40px,
       linear-gradient(#c3bec4, #c3bec4) 154px 284px / 38px 6px,
       linear-gradient(#c3bec4, #c3bec4) 8px 284px / 38px 6px,
-      conic-gradient(from 160deg at 50% 0%, #d76d55 0 40deg, transparent 0 100%)
+      conic-gradient(from 160deg at 50% 0%, #497D74 0 40deg, transparent 0 100%)
         150px 130px / 46px 60px,
-      conic-gradient(from 160deg at 50% 0%, #d76d55 0 40deg, transparent 0 100%)
+      conic-gradient(from 160deg at 50% 0%, #497D74 0 40deg, transparent 0 100%)
         4px 130px / 46px 60px,
-      linear-gradient(#a74c46, #a74c46) 146px 190px / 54px 8px,
-      linear-gradient(#a74c46, #a74c46) 0 190px / 54px 8px,
+      linear-gradient(#27445D, #27445D) 146px 190px / 54px 8px,
+      linear-gradient(#27445D, #27445D) 0 190px / 54px 8px,
       linear-gradient(#f0eef3, #f0eef3) 150px bottom / 46px 154px,
       linear-gradient(#f0eef3, #f0eef3) 4px bottom / 46px 154px,
       linear-gradient(#c3bec4, #c3bec4) 45px 190px / 110px 8px,
@@ -217,7 +217,7 @@ max-width: 100%
         36px,
       conic-gradient(from 128deg at 50% 0, #f0eef3 0 105deg, transparent 0 100%)
         30px 220px / 140px 56px,
-      conic-gradient(from 128deg at 50% 0, #d76d55 0 105deg, transparent 0 100%)
+      conic-gradient(from 128deg at 50% 0, #497D74 0 105deg, transparent 0 100%)
         30px 204px / 140px 56px,
       linear-gradient(
           to bottom,
@@ -236,12 +236,12 @@ max-width: 100%
         )
         142px bottom / 12px 204px,
       linear-gradient(#f0eef3, #f0eef3) 45px bottom / 110px 204px,
-      conic-gradient(from 160deg at 50% 0%, #d76d55 0 40deg, transparent 0 100%)
+      conic-gradient(from 160deg at 50% 0%, #497D74 0 40deg, transparent 0 100%)
         82px 0 / 36px 50px,
-      linear-gradient(#a54c46, #a54c46) 77px 50px / 46px 8px,
-      linear-gradient(#a54c46, #a54c46) 77px 88px / 46px 8px,
+      linear-gradient(#27445D, #27445D) 77px 50px / 46px 8px,
+      linear-gradient(#27445D, #27445D) 77px 88px / 46px 8px,
       linear-gradient(#f0eef3, #f0eef3) 80px 56px / 40px 40px,
-      radial-gradient(#d76d55 54px, transparent 55px) 45px 90px / 110px 110px;
+      radial-gradient(#497D74 54px, transparent 55px) 45px 90px / 110px 110px;
     background-repeat: no-repeat;
   }
   
@@ -450,7 +450,7 @@ h1 {
   transition: 700ms ease;
   font-variation-settings: "wght" 311;
   margin-bottom: 0.8rem;
-  color: rgb(243, 120, 72);
+  color: #497D74;
   outline: none;
   text-align: center;
   /* word-spacing: 50px; */
@@ -470,7 +470,7 @@ h2 {
   transition: 700ms ease;
   font-variation-settings: "wght" 311;
   margin-bottom: -2rem;
-  color: rgb(255, 255, 255);
+  color: #27445D;
   outline: none;
   text-align: center;
 }
@@ -488,6 +488,6 @@ p {
   /* top: 50%; */
   /* text-align: center; */
   transform: translate(-10%, -90%);
-  color: #2b293e;
+  color: #27445D;
   letter-spacing: .5px;
 }
