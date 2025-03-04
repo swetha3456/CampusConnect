@@ -19,6 +19,10 @@ urlpatterns = [
     path('collaborationform/', views.collaboration_form, name='collaboration_form'),
     path('collaboration/<int:collaboration_id>/', views.collaboration_detail, name='collaboration_detail'),
     path('update_application_status/<int:application_id>/<str:status>/', views.update_application_status, name='update_application_status'),
-
+    path('peertutor/', views.peertutor, name='peertutor'),
+    path('tutor-form/', views.tutorform, name='tutorform'),
+    path('tutorwanted-form/', views.tutorwantedform, name='tutorwantedform'),
+    path('add-tutor/', views.add_tutor, name='add_tutor'),
+    path('add-tutorwanted/', views.add_tutor_wanted, name='add_tutor_wanted')
 ]
 

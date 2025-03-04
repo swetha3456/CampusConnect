@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import LostItem, FoundItem, Issue1, Collaborative, User
+from .models import *
 
 def login(request):
     if request.method == 'POST':
@@ -208,6 +208,55 @@ def issue_central(request):
     issues = Issue1.objects.all()
     return render(request, "wordleapp/issue_central.html", {'issues' : issues})
 
+def peertutor(request):
+    context = {
+        'tutors' : Tutor.objects.all(), 
+        'tutors_wanted' : TutorWanted.objects.all()
+    }
+
+    return render(request, "wordleapp/peertutor.html", context)
+
+def tutorform(request):
+    return render(request, "wordleapp/tutorform.html")
+
+def tutorwantedform(request):
+    return render(request, "wordleapp/tutorwantedform.html")
+
+def add_tutor(request):
+    if request.method == 'POST':
+        tutor = Tutor(
+            name = request.POST.get('name'),
+            subject = request.POST.get('subject'),
+            payment = request.POST.get('payment'),
+            contact = request.POST.get('contact')
+        )
+
+        tutor.save()
+
+        context = {
+            'tutors' : Tutor.objects.all(), 
+            'tutors_wanted' : TutorWanted.objects.all()
+        }
+
+        return render(request, "wordleapp/peertutor.html", context)
+    
+def add_tutor_wanted(request):
+    if request.method == 'POST':
+        tutorwanted = TutorWanted(
+            name = request.POST.get('name'),
+            subject = request.POST.get('subject'),
+            payment = request.POST.get('payment'),
+            contact = request.POST.get('contact')
+        )
+
+        tutorwanted.save()
+
+        context = {
+            'tutors' : Tutor.objects.all(), 
+            'tutors_wanted' : TutorWanted.objects.all()
+        }
+
+        return render(request, "wordleapp/peertutor.html", context)
 
 
 

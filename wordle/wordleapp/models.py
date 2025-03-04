@@ -90,3 +90,15 @@ class Issue1(models.Model):
     def __str__(self):
         return f"{self.issue_name} - {self.issue_descr} - {self.comment1} - {self.comment2}- {self.comment3}- {self.comment4}- {self.comment5}"
 
+class Tutor(models.Model):
+    name = models.CharField(max_length=255)
+    subject = models.CharField(max_length=255)
+    contact = models.CharField(max_length=15, null=True, blank=True)
+    payment = models.FloatField()
+
+class TutorWanted(models.Model):
+    name = models.CharField(max_length=255)
+    subject = models.CharField(max_length=255)
+    contact = models.CharField(max_length=15, null=True, blank=True)
+    payment = models.FloatField()
+
