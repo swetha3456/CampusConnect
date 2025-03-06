@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views
-
+from .views import submit_resume
+from django.conf import settings
+from django.conf.urls.static import static
 urlpatterns = [
     path('', views.home, name='home'),
     path('login/', views.login, name='login'),
@@ -23,6 +25,8 @@ urlpatterns = [
     path('tutor-form/', views.tutorform, name='tutorform'),
     path('tutorwanted-form/', views.tutorwantedform, name='tutorwantedform'),
     path('add-tutor/', views.add_tutor, name='add_tutor'),
-    path('add-tutorwanted/', views.add_tutor_wanted, name='add_tutor_wanted')
-]
+    path('add-tutorwanted/', views.add_tutor_wanted, name='add_tutor_wanted'),
+    path('submit_resume/', submit_resume, name='submit_resume'),
+    # path('upload-resume/', views.upload_resume, name='upload_resume'),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

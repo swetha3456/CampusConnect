@@ -54,7 +54,7 @@ class Collaborative(models.Model):
     deadline = models.DateField( blank=True, null=True)
     posted_by = models.CharField(max_length=255, blank=True, null=True)  # Can store the user's name or email
     contact_email = models.EmailField(max_length=255, blank=True, null=True)
-
+    created_at = models.DateTimeField(auto_now_add=True,blank=True, null=True)
     def __str__(self):
         return f"{self.event_name} - {self.organizer}"
 

@@ -121,9 +121,11 @@
     </div>
 
     <!-- Get Started Button -->
-    <div class="get-started">
-      <a href="http://127.0.0.1:8000/register" class="btn">Get Started</a>
-    </div>
+    {% if not user.is_authenticated %}
+        <div class="get-started">
+            <a href="{% url 'register' %}" class="btn">Get Started</a>
+        </div>
+        {% endif %}
 
     <!-- Swiper JS for Carousel -->
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>

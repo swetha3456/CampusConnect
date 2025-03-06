@@ -81,40 +81,77 @@ def process_issue(request):
         issues=Issue1.objects.all()
         return render(request, 'wordleapp/issue_central.html', {'issues' : issues})
 
+from django.core.paginator import Paginator
+from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from .models import Collaborative
+from wordleapp.forms import CollaborationForm
+from django.contrib import messages
+
 def process_collaboration(request):
     if request.method == 'POST':
-        event_name = request.POST.get('event_name')
-        organizer = request.POST.get('organizer', '')  # Optional
-        collaboration_descr = request.POST.get('collaboration_descr')
-        skills_preferred = request.POST.get('skills_preferred')
-        team_size = request.POST.get('team_size')
-        deadline = request.POST.get('deadline')
-        posted_by = request.POST.get('posted_by')
-        contact_email = request.POST.get('contact_email')
-        if not all([event_name, collaboration_descr, skills_preferred, team_size, deadline, posted_by]):
-            return HttpResponse("Error: All fields except organizer are required.", status=400)
+        form = CollaborationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Collaboration request posted successfully!")
+            return redirect('collaboration')
+        else:
+            messages.error(request, "Error in form submission. Please check your inputs.")
+    else:
+        form = CollaborationForm()
 
-        # Save collaboration to DB
-        collab = Collaborative(
-            event_name=event_name,
-            organizer=organizer,
-            collaboration_descr=collaboration_descr,
-            skills_preferred=skills_preferred,
-            team_size=team_size,
-            deadline=deadline,
-            posted_by=posted_by,
-            contact_email=contact_email,
-        )
-        collab.save()
-
-        return redirect('collaboration')  # Redirect to collaboration list page after submitting
+    return render(request, "wordleapp/collaboration_form.html", {"form": form})
 
 def collaboration(request):
-    collabs = Collaborative.objects.all()
+    collabs_list = Collaborative.objects.all().order_by('-created_at')
+    
+    # Pagination settings
+    paginator = Paginator(collabs_list, 5)  # Show 5 collaborations per page
+    page_number = request.GET.get('page')
+    collabs = paginator.get_page(page_number)
+
     return render(request, 'wordleapp/collaboration.html', {'collabs': collabs})
 
 def collaboration_form(request):
-    return render(request, "wordleapp/collaboration_form.html")
+    form = CollaborationForm()
+    return render(request, "wordleapp/collaboration_form.html", {"form": form})
+
+from django.core.mail import EmailMessage
+from django.core.mail import send_mail
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
+from django.core.files.storage import default_storage
+from django.conf import settings
+from .models import Collaborative
+import os
+
+def submit_resume(request):
+    if request.method == "POST" and request.FILES.get("resume"):
+        collab_id = request.POST.get("collab_id")
+        collab = get_object_or_404(Collaborative, id=collab_id)
+
+        resume_file = request.FILES["resume"]
+        
+        # Save file to media directory (inside /media/resumes/)
+        resume_path = f"resumes/{resume_file.name}"
+        file_path = default_storage.save(resume_path, resume_file)
+        file_url = f"{settings.MEDIA_URL}{file_path}"  # URL to access file
+
+        # Email with a download link
+        send_mail(
+            subject=f"New Collaboration Request for {collab.event_name}",
+            message=(
+                f"A user has submitted their resume for {collab.event_name}.\n\n"
+                f"Download Resume: {request.build_absolute_uri(file_url)}"
+            ),
+            from_email="sharvaniakkenapally@gmail.com",
+            recipient_list=[collab.contact_email],
+            fail_silently=False,
+        )
+
+        return JsonResponse({"message": "Resume submitted successfully!"})
+
+    return JsonResponse({"message": "Invalid request"}, status=400)
 
 # def collaboration_dashboard(request):
 #     collaborations = CollaborationRequest.objects.all()

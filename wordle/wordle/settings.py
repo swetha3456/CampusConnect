@@ -29,6 +29,22 @@ ALLOWED_HOSTS = []
 
 STATIC_ROOT = BASE_DIR / 'static_collected'
 
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = "sharvaniakkenapally@gmail.com"  # Replace with your Gmail address
+EMAIL_HOST_PASSWORD = "pkubxtizxtjrsnnn"  # Replace with the App Password
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+import os
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+# Ensure this setting is included in your installed apps
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -39,6 +55,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'wordleapp',
+
 ]
 
 MIDDLEWARE = [

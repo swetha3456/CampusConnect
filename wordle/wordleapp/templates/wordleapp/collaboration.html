@@ -373,8 +373,10 @@ h1 {
                 <button class="join-btn" onclick="openResumeForm(this)">Request to Join</button>
                 <div class="resume-form" style="display: none;">
                   <h2>Submit Your Resume</h2>
-                  <form>
-                    <input type="file" accept=".pdf,.doc,.docx">
+                  <form class="resume-upload-form" method="POST" action="{% url 'submit_resume' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="hidden" name="collab_id" value="{{ collab.id }}">
+                    <input type="file" name="resume" accept=".pdf,.doc,.docx" required>
                     <button type="submit">Submit</button>
                   </form>
                 </div>
@@ -403,7 +405,20 @@ h1 {
         </ul>
       {% endfor %}
     </div>
-    
+  <!-- Pagination Controls -->
+<div class="pagination">
+  {% if collabs.has_previous %}
+      <a href="?page=1">First</a>
+      <a href="?page={{ collabs.previous_page_number }}">Previous</a>
+  {% endif %}
+
+  <span>Page {{ collabs.number }} of {{ collabs.paginator.num_pages }}</span>
+
+  {% if collabs.has_next %}
+      <a href="?page={{ collabs.next_page_number }}">Next</a>
+      <a href="?page={{ collabs.paginator.num_pages }}">Last</a>
+  {% endif %}
+</div>
     <script>
       // Function to toggle the visibility of the applications
       function toggleApplications(collabId) {
@@ -433,12 +448,41 @@ h1 {
         });
       }
 
-      function openResumeForm(button) {
-        document.querySelectorAll(".resume-form").forEach(form => form.style.display = "none");
-        let form = button.nextElementSibling;
-        form.style.display = "block";
-      }
-    </script>
+      // function openResumeForm(button) {
+      //   document.querySelectorAll(".resume-form").forEach(form => form.style.display = "none");
+      //   let form = button.nextElementSibling;
+      //   form.style.display = "block";
+      // }
+      
+function openResumeForm(button) {
+    let form = button.nextElementSibling;
+    form.style.display = form.style.display === "none" ? "block" : "none";
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".resume-upload-form").forEach(form => {
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            let formData = new FormData(this);
+            
+            fetch("{% url 'submit_resume' %}", {
+                method: "POST",
+                body: formData,
+                headers: {
+                    "X-CSRFToken": document.querySelector("[name=csrfmiddlewaretoken]").value
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+            })
+            .catch(error => console.error("Error:", error));
+        });
+    });
+});
+</script>
+
+
   <div class="left">
       <div class="cat">
         <div class="ears1"></div>
