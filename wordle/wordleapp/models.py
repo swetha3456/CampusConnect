@@ -1,12 +1,25 @@
 from django.db import models
 
 # Create your models here.
+from django.contrib.auth.hashers import make_password, check_password
+from django.db import models
+
 class User(models.Model):
-    username = models.CharField(max_length=255)
-    password = models.CharField(max_length=255)
+    username = models.CharField(max_length=255, unique=True)
+    password = models.CharField(max_length=255)  # Will store hashed passwords
+
+    def save(self, *args, **kwargs):
+        # Hash the password before saving
+        if not self.password.startswith('pbkdf2_sha256$'):  # Avoid double hashing
+            self.password = make_password(self.password)
+        super().save(*args, **kwargs)
+
+    def check_password(self, raw_password):
+        return check_password(raw_password, self.password)
 
     def __str__(self):
         return self.username
+
     
 # class LostItem(models.Model):
 #     item_name = models.CharField(max_length=255)

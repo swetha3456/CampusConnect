@@ -2,25 +2,60 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import *
 
-def login(request):
-    if request.method == 'POST':
-        user = User.objects.get(username=request.POST.get('username'))
-
-        if user.password == request.POST.get('username'):
-            request.session['username'] = user.username
-            return redirect('home')
-        
-    return render(request, "wordleapp/login.html")
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from .models import User
 
 def register(request):
     if request.method == 'POST':
-        user = User(request.POST.get('username'), request.POST.get('password'))
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        confirm_password = request.POST.get('logpass')  # Confirm password field
+
+        if password != confirm_password:
+            messages.error(request, "Passwords do not match!")
+            return redirect('register')
+
+        if User.objects.filter(username=username).exists():
+            messages.error(request, "Username already taken!")
+            return redirect('register')
+
+        user = User(username=username, password=password)  # `save()` auto-hashes password
         user.save()
-        request.session['username'] = user.username
+
+        request.session['username'] = user.username  # Start session
+        messages.success(request, "Registration successful!")
         return redirect('home')
+
     return render(request, "wordleapp/register.html")
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from .models import User
+
+def login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        try:
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            messages.error(request, "User not found!")
+            return redirect('login')
+
+        if user.check_password(password):  # Secure password checking
+            request.session['username'] = user.username
+            messages.success(request, "Login successful!")
+            return redirect('home')
+        else:
+            messages.error(request, "Incorrect password!")
+            return redirect('login')
+
+    return render(request, "wordleapp/login.html")
 
 def home(request):
+    return render(request, "wordleapp/home.html")
+def land(request):
     return render(request, "wordleapp/user.html")
 
 # View to process the lost item form and add new items
